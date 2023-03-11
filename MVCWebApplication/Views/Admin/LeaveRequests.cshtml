@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MVCWebApplication.Models.Admin.LeaveRequests>
+
+@{
+    ViewBag.Title = "LeaveRequests";
+    Layout = "~/Views/Shared/Admin/_Layout_Admin.cshtml";
+}
+
+<h2>Leave Requests</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartingFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndingAt)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartingFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndingAt)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "GrantOrRejectLeave", new { id = item.Id }) 
+         </td>
+    </tr>
+}
+
+</table>

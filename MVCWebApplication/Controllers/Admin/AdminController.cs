@@ -1,7 +1,7 @@
 ﻿using DataLibrary.Business_Logic;
 using MVCWebApplication.Models;
+using MVCWebApplication.Models.Admin;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -38,7 +38,8 @@ namespace MVCWebApplication.Controllers
             if (ModelState.IsValid)
             {
                 ProcessData.CreateEmployee(employee.EmployeeId, employee.Email, employee.FirstName, employee.LastName,
-                    employee.Password);
+                    employee.Password, employee.FatherName, employee.Degree, employee.Experience, employee.Address,
+                    employee.JoiningDate, employee.Department);
                 return RedirectToAction("ShowEmployees");
             }
 
@@ -62,6 +63,12 @@ namespace MVCWebApplication.Controllers
                 FirstName = DataEmployee.FirstName,
                 LastName = DataEmployee.LastName,
                 Email = DataEmployee.Email,
+                FatherName = DataEmployee.FatherName,
+                Degree = DataEmployee.Degree,
+                Experience = DataEmployee.Experience,
+                Address = DataEmployee.Address,
+                JoiningDate = DataEmployee.DateOfJoining,
+                Department = DataEmployee.Department
 
             };
             return View(employee);
@@ -77,9 +84,9 @@ namespace MVCWebApplication.Controllers
                 string email = employee.Email,
                  firstName = employee.FirstName,
                  lastName = employee.LastName;
-                Debug.WriteLine(employeeId);
-                Debug.WriteLine(id);
-                ProcessData.UpdateEmployee(id, employeeId, email, firstName, lastName);
+                ProcessData.UpdateEmployee(id, employeeId, email, firstName, lastName,
+                employee.FatherName, employee.Degree, employee.Experience, employee.Address,
+                employee.JoiningDate, employee.Department);
             }
             return RedirectToAction("ShowEmployees");
 
@@ -118,10 +125,74 @@ namespace MVCWebApplication.Controllers
                     FirstName = emp.FirstName,
                     LastName = emp.LastName,
                     Email = emp.Email,
-                    EmployeeId = emp.EmployeeId
+                    EmployeeId = emp.EmployeeId,
+                    FatherName = emp.FatherName,
+                    Degree = emp.Degree,
+                    Experience = emp.Experience,
+                    Address = emp.Address,
+                    JoiningDate = emp.DateOfJoining,
+                    Department = emp.Department
                 });
             }
             return View(employeeList);
+        }
+
+        // VIEW LEAVE REQUESTS MADE BY EMPLOYEE
+        public ActionResult LeaveRequests()
+        {
+            List<DataLibrary.Models.Admin.LeaveRequests> data = ProcessData.ShowLeaveRequests();
+            List<LeaveRequests> requests = new List<LeaveRequests>();
+            foreach (var leaveRequest in data)
+            {
+                requests.Add(new LeaveRequests()
+                {
+                    Id = leaveRequest.Id,
+                    EmployeeId = leaveRequest.EmployeeId,
+                    EmployeeName = leaveRequest.EmployeeName,
+                    Department = leaveRequest.Department,
+                    EndingAt = leaveRequest.EndingAt,
+                    StartingFrom = leaveRequest.StartingFrom,
+                    Reason = leaveRequest.Reason
+
+
+                });
+            }
+            return View(requests);
+        }
+
+        // GRANT OR REJECT LEAVE BY ADMIN
+        public ActionResult GrantOrRejectLeave(int id)
+        {
+            DataLibrary.Models.Admin.Admin_LeaveDetails admin_LeaveDetails = ProcessData.GetLeaveDetailsById(id);
+            LeaveDetails leaveDetails = new LeaveDetails()
+            {
+                CL = admin_LeaveDetails.CL,
+                Days = admin_LeaveDetails.Days,
+                Department = admin_LeaveDetails.Department,
+                Email = admin_LeaveDetails.Email,
+                EmployeeId = admin_LeaveDetails.EmployeeId,
+                EmployeeName = admin_LeaveDetails.EmployeeName,
+                EndingAt = admin_LeaveDetails.EndingAt,
+                Reason = admin_LeaveDetails.Reason,
+                StartingFrom = admin_LeaveDetails.StartingFrom,
+                PL = admin_LeaveDetails.PL
+
+            };
+            return View(leaveDetails);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GrantOrRejectLeave(int id, LeaveDetails modal)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isAccepted = modal.Accepted;
+                bool isRejected = modal.Rejected;
+                ProcessData.AcceptOrRejectLeave(id, isAccepted && isAccepted);
+                return RedirectToAction("LeaveRequests", "Admin");
+            }
+            ModelState.AddModelError("", "Please enter all the field to proceed");
+            return View();
         }
 
         //Logout

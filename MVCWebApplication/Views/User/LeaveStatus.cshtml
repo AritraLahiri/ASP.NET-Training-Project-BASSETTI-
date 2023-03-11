@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MVCWebApplication.Models.User.LeaveStatus>
+
+@{
+    ViewBag.Title = "Leave Status Page";
+    Layout = "~/Views/Shared/Users/_Layout_User.cshtml";
+}
+
+<h2>My Leaves</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CasualLeaves)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaidLeaves)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RejectionReason)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CasualLeaves)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaidLeaves)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RejectionReason)
+        </td>
+  </tr>
+}
+
+</table>
