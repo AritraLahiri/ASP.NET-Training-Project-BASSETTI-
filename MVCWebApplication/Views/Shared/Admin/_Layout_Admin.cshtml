@@ -26,7 +26,7 @@
                     <li>@Html.ActionLink("Search", "SearchEmployee", "Admin")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Hello " + User.Identity.Name , "Index", "Admin")</li>
+                    <li>@Html.ActionLink("Hello " + User.Identity.Name, "Index", "Admin")</li>
                     <li>@Html.ActionLink("Leave Requests", "LeaveRequests", "Admin")</li>
                     <li>@Html.ActionLink("Logout", "Logout", "Admin")</li>
                 </ul>
@@ -36,11 +36,12 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-       
+
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

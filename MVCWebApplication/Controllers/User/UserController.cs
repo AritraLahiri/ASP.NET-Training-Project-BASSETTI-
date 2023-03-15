@@ -106,6 +106,8 @@ namespace MVCWebApplication.Controllers
                     StartingDate = leave.Starting,
                     EndingDate = leave.Ending
                 };
+                ViewBag.PaidLeave = status.PaidLeaves;
+                ViewBag.CasualLeave = status.CasualLeaves;
                 data.Add(status);
             }
             return View(data);

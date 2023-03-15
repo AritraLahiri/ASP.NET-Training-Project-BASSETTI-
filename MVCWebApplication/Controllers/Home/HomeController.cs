@@ -42,7 +42,7 @@ namespace MVCWebApplication.Controllers
                 bool IsAdmin = User_Data_Process.CheckIfUserIsAdmin(Id);
                 if (Id > 0)
                 {
-                    FormsAuthentication.SetAuthCookie(Email, false);
+                    FormsAuthentication.SetAuthCookie(Email, true);
                     Session["uId"] = Id;
                     if (IsAdmin) return RedirectToAction("Index", "Admin");
                     else return RedirectToAction("Index", "User");

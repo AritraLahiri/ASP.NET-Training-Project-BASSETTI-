@@ -5,59 +5,91 @@
     Layout = "~/Views/Shared/Users/_Layout_User.cshtml";
 }
 
-<h2>My Leaves</h2>
+@if (Model.Count() == 0)
+{
 
+    <div class="jumbotron">
+        <h1 class="display-4">No Leave Applied Yet !</h1>
+        <p class="lead">Get details of all the leaves applied along with status and dates.</p>
+        <p class="lead">Nice there are no leaves applied.</p>
+        <hr class="my-4">
+    </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Reason)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartingDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndingDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CasualLeaves)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaidLeaves)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RejectionReason)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Reason)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartingDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndingDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CasualLeaves)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaidLeaves)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RejectionReason)
-        </td>
-  </tr>
 }
 
-</table>
+else
+{
+
+    <div class="jumbotron">
+        <h1 class="display-4">Leave History</h1>
+        <p class="lead">Get details of all the leaves applied along with status and dates.</p>
+        <hr class="my-4">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Casual Leaves </h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Total No of CL Left</h5>
+                    <h2 class="card-text">@ViewBag.CasualLeave</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Paid Leaves </h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Total No of PL Left</h5>
+                    <h2 class="card-text">@ViewBag.PaidLeave</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4" />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RejectionReason)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reason)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RejectionReason)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
