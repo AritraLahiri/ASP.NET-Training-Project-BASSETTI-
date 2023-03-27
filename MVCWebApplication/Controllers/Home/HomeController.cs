@@ -1,4 +1,5 @@
 ﻿using DataLibrary.Business_Logic.User;
+using DataLibrary.Models;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -42,7 +43,9 @@ namespace MVCWebApplication.Controllers
                 bool IsAdmin = User_Data_Process.CheckIfUserIsAdmin(Id);
                 if (Id > 0)
                 {
-                    FormsAuthentication.SetAuthCookie(Email, true);
+                    User_Model userData = User_Data_Process.GetUserProfileById(Id);
+                    string userName = userData.FirstName;
+                    FormsAuthentication.SetAuthCookie(userName, true);
                     Session["uId"] = Id;
                     if (IsAdmin) return RedirectToAction("Index", "Admin");
                     else return RedirectToAction("Index", "User");
