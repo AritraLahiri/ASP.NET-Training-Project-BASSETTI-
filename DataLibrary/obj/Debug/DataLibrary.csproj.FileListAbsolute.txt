@@ -1,0 +1,6 @@
+C:\Users\ARITRA LAHIRI\source\repos\DataLibrary\bin\Debug\DataLibrary.dll
+C:\Users\ARITRA LAHIRI\source\repos\DataLibrary\bin\Debug\DataLibrary.pdb
+C:\Users\ARITRA LAHIRI\source\repos\DataLibrary\obj\Debug\DataLibrary.csproj.AssemblyReference.cache
+C:\Users\ARITRA LAHIRI\source\repos\DataLibrary\obj\Debug\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\ARITRA LAHIRI\source\repos\DataLibrary\obj\Debug\DataLibrary.dll
+C:\Users\ARITRA LAHIRI\source\repos\DataLibrary\obj\Debug\DataLibrary.pdb
